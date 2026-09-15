@@ -26,7 +26,7 @@ $property = $result->fetch_assoc();
 
 /* Get property images */
 
-$image_sql = "SELECT image 
+$image_sql = "SELECT image_url
               FROM property_images 
               WHERE property_id = $property_id";
 
@@ -43,8 +43,33 @@ $amenity_sql = "SELECT amenities.name
 
 $amenity_result = $conn->query($amenity_sql);
 
-?>
 
+
+/* Get property reviews */
+
+$review_sql = "SELECT reviews.*, users.name
+               FROM reviews
+               INNER JOIN users
+               ON reviews.user_id = users.id
+               WHERE reviews.property_id = $property_id
+               ORDER BY reviews.created_at DESC";
+
+$review_result = $conn->query($review_sql);
+
+
+/* Get average rating */
+
+$rating_sql = "SELECT AVG(rating) AS average_rating
+               FROM reviews
+               WHERE property_id = $property_id";
+
+$rating_result = $conn->query($rating_sql);
+
+$rating_data = $rating_result->fetch_assoc();
+
+$average_rating = $rating_data['average_rating'];
+
+?>
 <!DOCTYPE html>
 
 <html lang="en">
@@ -56,7 +81,7 @@ $amenity_result = $conn->query($amenity_sql);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>
-        <?php echo htmlspecialchars($property['title']); ?> - StayEase
+        <?php echo htmlspecialchars($property['titel']); ?> - StayEase
     </title>
 
     <link rel="stylesheet" href="../assets/css/properties.css">
@@ -116,7 +141,7 @@ $amenity_result = $conn->query($amenity_sql);
             <h1>
 
                 <?php
-                echo htmlspecialchars($property['title']);
+                echo htmlspecialchars($property['titel']);
                 ?>
 
             </h1>
@@ -157,40 +182,41 @@ $amenity_result = $conn->query($amenity_sql);
 
     <!-- ================= IMAGES ================= -->
 
-    <div class="details-gallery">
+<div class="details-gallery">
 
-        <?php
+    <?php
 
-        if ($image_result->num_rows > 0) {
+    if ($image_result->num_rows > 0) {
 
-            while ($image = $image_result->fetch_assoc()) {
+        while ($image = $image_result->fetch_assoc()) {
 
-        ?>
+    ?>
 
-            <img
-                src="../assets/images/<?php echo htmlspecialchars($image['image']); ?>"
-                alt="<?php echo htmlspecialchars($property['title']); ?>"
-            >
+        <img
+            src="../assets/images/<?php echo htmlspecialchars($image['image_url']); ?>"
+            alt="<?php echo htmlspecialchars($property['titel']); ?>"
+        >
 
-        <?php
-
-            }
-
-        } else {
-
-        ?>
-
-            <div class="no-image">
-            
-            </div>
-
-        <?php
+    <?php
 
         }
 
-        ?>
+    } else {
 
-    </div>
+    ?>
+
+        <div class="no-image">
+            No images available.
+        </div>
+
+    <?php
+
+    }
+
+    ?>
+
+</div>
+
     <!-- ================= MAP ================= -->
 
 <section class="property-map">
@@ -320,6 +346,72 @@ $amenity_result = $conn->query($amenity_sql);
                 ?>
 
             </div>
+
+
+            <!-- ================= REVIEWS ================= -->
+
+<section class="reviews-section">
+
+    <h2>Reviews</h2>
+
+    <!-- Average Rating -->
+
+    <div class="average-rating">
+
+        <?php if ($average_rating !== null) { ?>
+
+            <strong>
+                <?php echo number_format($average_rating, 1); ?> / 5
+            </strong>
+
+            ⭐️
+
+        <?php } else { ?>
+
+            <p>No ratings yet.</p>
+
+        <?php } ?>
+
+    </div>
+
+
+    <!-- Reviews List -->
+
+    <?php if ($review_result->num_rows > 0) { ?>
+
+        <?php while ($review = $review_result->fetch_assoc()) { ?>
+
+            <div class="review">
+
+                <h3>
+                    <?php echo htmlspecialchars($review['name']); ?>
+                </h3>
+
+                <p>
+                    Rating:
+                    <?php echo $review['rating']; ?> / 5 ⭐️
+                </p>
+
+                <p>
+                    <?php echo htmlspecialchars($review['comment']); ?>
+                </p>
+
+                <small>
+                    <?php echo $review['created_at']; ?>
+                </small>
+
+            </div>
+
+        <?php } ?>
+
+    <?php } else { ?>
+
+        <p>No reviews yet.</p>
+
+    <?php } ?>
+
+</section>
+
 
 
         </div>

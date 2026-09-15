@@ -1,0 +1,16 @@
+<?php
+
+require_once "../config/database.php";
+
+if (isset($_GET['id'])) {
+
+    $id = $_GET['id'];
+
+    mysqli_query($conn, "DELETE FROM properties WHERE id = $id");
+
+}
+
+header("Location: properties.php");
+exit;
+
+?>
