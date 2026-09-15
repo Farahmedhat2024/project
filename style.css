@@ -1,0 +1,338 @@
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Work+Sans:wght@400;500;600&display=swap');
+
+:root {
+    --ink: #1E2A28;
+    --paper: #FBF9F4;
+    --teal: #2B5D53;
+    --teal-dark: #17322D;
+    --rust: #B85C38;
+    --rust-dark: #9A4A2B;
+    --line: #E3DDCF;
+    --muted: #6B7570;
+    --error: #A6392C;
+    --success: #2B5D53;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: 'Work Sans', sans-serif;
+    color: var(--ink);
+    background: var(--paper);
+    -webkit-font-smoothing: antialiased;
+}
+
+.auth-shell {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+/* ===== اللوحة اليسرى (الهوية / الرسالة التسويقية) ===== */
+.auth-hero {
+    background: var(--teal-dark);
+    color: var(--paper);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 3rem;
+}
+
+.auth-hero .brand {
+    font-family: 'Fraunces', serif;
+    font-size: 1.4rem;
+    letter-spacing: 0.02em;
+}
+
+.auth-hero .headline {
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-size: clamp(2.2rem, 4vw, 3.2rem);
+    line-height: 1.15;
+    max-width: 12ch;
+}
+
+.auth-hero .caption {
+    color: #C9D6D1;
+    font-size: 1rem;
+    line-height: 1.6;
+    max-width: 34ch;
+}
+
+/* ===== اللوحة اليمنى (الفورم) ===== */
+.auth-panel {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem 2rem;
+}
+
+.auth-form-wrap {
+    width: 100%;
+    max-width: 400px;
+}
+
+.auth-form-wrap h1 {
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-size: 1.9rem;
+    margin: 0 0 0.4rem;
+}
+
+.auth-form-wrap .sub {
+    color: var(--muted);
+    margin: 0 0 2rem;
+    font-size: 0.95rem;
+}
+
+.field-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.field {
+    margin-bottom: 1.4rem;
+}
+
+.field label {
+    display: block;
+    font-size: 0.85rem;
+    color: var(--muted);
+    margin-bottom: 0.4rem;
+}
+
+.field input {
+    width: 100%;
+    border: none;
+    border-bottom: 1.5px solid var(--line);
+    background: transparent;
+    padding: 0.5rem 0.1rem;
+    font-size: 1rem;
+    font-family: inherit;
+    color: var(--ink);
+    transition: border-color 0.15s ease;
+}
+
+.field input:focus {
+    outline: none;
+    border-bottom-color: var(--teal);
+}
+
+.field input:focus-visible {
+    outline: 2px solid var(--teal);
+    outline-offset: 2px;
+}
+
+.btn-primary {
+    width: 100%;
+    background: var(--rust);
+    color: #fff;
+    border: none;
+    padding: 0.85rem 1rem;
+    font-size: 1rem;
+    font-family: inherit;
+    font-weight: 500;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.15s ease;
+    margin-top: 0.5rem;
+}
+
+.btn-primary:hover {
+    background: var(--rust-dark);
+}
+
+.btn-primary:focus-visible {
+    outline: 2px solid var(--teal-dark);
+    outline-offset: 2px;
+}
+
+.auth-footer-link {
+    margin-top: 1.6rem;
+    font-size: 0.9rem;
+    color: var(--muted);
+}
+
+.auth-footer-link a {
+    color: var(--teal);
+    font-weight: 500;
+    text-decoration: none;
+}
+
+.auth-footer-link a:hover {
+    text-decoration: underline;
+}
+
+.form-errors {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1.6rem;
+    border-inline-start: 3px solid var(--error);
+    padding-inline-start: 0.9rem;
+}
+
+.form-errors li {
+    color: var(--error);
+    font-size: 0.9rem;
+    line-height: 1.6;
+}
+
+.form-success {
+    border-inline-start: 3px solid var(--success);
+    padding-inline-start: 0.9rem;
+    color: var(--ink);
+    line-height: 1.7;
+}
+
+.form-success a {
+    color: var(--teal);
+    font-weight: 500;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    * {
+        transition: none !important;
+    }
+}
+
+/* ===================================================
+   الكارت الجديد بتابز Sign In / Sign Up
+   =================================================== */
+.card-shell {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--paper);
+    padding: 2rem 1rem;
+}
+
+.auth-card {
+    width: 100%;
+    max-width: 780px;
+    background: #fff;
+    border-radius: 24px;
+    box-shadow: 0 40px 80px -30px rgba(23, 50, 45, 0.28);
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: 1fr 1.1fr;
+}
+
+.auth-card-hero {
+    background: var(--teal-dark);
+    color: var(--paper);
+    padding: 2.4rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.auth-card-hero .brand {
+    font-family: 'Fraunces', serif;
+    font-size: 1.25rem;
+}
+
+.auth-card-hero .hero-heading {
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-size: clamp(1.6rem, 3vw, 2.1rem);
+    line-height: 1.25;
+    margin: 0 0 0.6rem;
+}
+
+.auth-card-hero .hero-caption {
+    color: #C9D6D1;
+    font-size: 0.92rem;
+    line-height: 1.6;
+    max-width: 30ch;
+}
+
+/* شريط التابز (Sign In / Sign Up) */
+.tab-nav {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 999px;
+    padding: 4px;
+    width: fit-content;
+    min-width: 200px;
+}
+
+.tab-nav a {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    padding: 0.55rem 1rem;
+    border-radius: 999px;
+    color: #C9D6D1;
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 500;
+    transition: color 0.2s ease;
+}
+
+.tab-nav a.active {
+    color: var(--teal-dark);
+}
+
+.tab-nav .active-bar {
+    position: absolute;
+    top: 4px;
+    bottom: 4px;
+    width: calc(50% - 4px);
+    background: var(--paper);
+    border-radius: 999px;
+    transition: left 0.25s ease;
+}
+
+.tab-nav .active-bar.pos-signin {
+    left: 4px;
+}
+
+.tab-nav .active-bar.pos-signup {
+    left: calc(50% + 0px);
+}
+
+.auth-card-body {
+    padding: 2.6rem 2.4rem;
+    display: flex;
+    align-items: center;
+}
+
+.auth-card-body .auth-form-wrap {
+    max-width: none;
+}
+
+@media (max-width: 760px) {
+    .auth-card {
+        grid-template-columns: 1fr;
+    }
+    .auth-card-hero {
+        padding: 1.8rem;
+    }
+    .auth-card-body {
+        padding: 1.8rem;
+    }
+}
+
+/* ===== موبايل: نلغي اللوحة الغامقة ونسيب الفورم بس ===== */
+@media (max-width: 860px) {
+    .auth-shell {
+        grid-template-columns: 1fr;
+    }
+    .auth-hero {
+        display: none;
+    }
+    .auth-panel {
+        padding: 2rem 1.4rem;
+    }
+    .field-row {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+}
