@@ -6,7 +6,7 @@
 
  
 
-$conn = mysqli_connect('localhost', 'root', "", 'airbnb_clone');
+$conn = mysqli_connect('localhost', 'root', "", 'stayease');
  
 
 if (!$conn) {
