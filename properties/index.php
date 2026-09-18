@@ -26,23 +26,7 @@ $result = $conn->query($sql);
 <body>
 
     <!-- Navbar -->
-    <nav class="navbar">
-
-        <div class="logo">
-            StayEase
-        </div>
-
-        <div class="nav-links">
-
-            <a href="../index.php">Home</a>
-
-            <a href="index.php">Properties</a>
-
-            <a href="#">Login</a>
-
-        </div>
-
-    </nav>
+    <?php require_once __DIR__ . "/../includes/navbar.php"; ?>
 
 
     <!-- Page Header -->

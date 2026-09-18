@@ -1,24 +1,24 @@
 <?php
-
+declare(strict_types=1);
 
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-
-function require_login() {
-    if (!isset($_SESSION['user_id'])) {
-        header("Location: login.php");
+function require_login(): void
+{
+    if (empty($_SESSION['user_id'])) {
+        header('Location: /nti/final_project/PROJECT/login.php');
         exit;
     }
 }
 
+function require_admin(): void
+{
+    require_login();
 
-
-function require_admin() {
-    require_login(); // لازم يكون عامل login الأول
     if (($_SESSION['role'] ?? 'user') !== 'admin') {
-        header("Location: index.php");
+        header('Location: /nti/final_project/PROJECT/index.php');
         exit;
     }
 }

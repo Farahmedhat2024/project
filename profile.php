@@ -15,7 +15,13 @@ mysqli_stmt_execute($stmt);
 $result = mysqli_stmt_get_result($stmt);
 $user = mysqli_fetch_assoc($result);
 mysqli_stmt_close($stmt);
- 
+
+if (!$user) {
+    $_SESSION = [];
+    session_destroy();
+    header('Location: login.php');
+    exit;
+}
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_account'])) {
  

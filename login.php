@@ -26,12 +26,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         mysqli_stmt_close($stmt);
 
         if ($user && password_verify($password, $user['password'])) {
+            session_regenerate_id(true);
 
-        $_SESSION['user_id']    = $user['id'];
+            $_SESSION['user_id'] = (int) $user['id'];
             $_SESSION['first_name'] = $user['first_name'];
-            $_SESSION['role']       = $user['role'];
+            $_SESSION['role'] = $user['role'];
 
-            header("Location: index.php");
+            header('Location: properties/index.php');
             exit;
         } else {
             $errors[] = "الإيميل أو الباسورد غلط";
